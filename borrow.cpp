@@ -1,17 +1,43 @@
+// -------------------------------- borrow.cpp ---------------------------------
+// Nandini Mistry & Zainab Ahsan   CSS 343
+// Created:  2026-05-24
+// Modified: 2026-06-06
+// ----------------------------------------------------------------------------
+// Purpose: Implements the Borrow transaction. Validates the customer and movie,
+//          decrements stock, and appends this transaction to customer history.
+//          On success, ownership of this object transfers to the customer.
+// ----------------------------------------------------------------------------
+
 #include "borrow.h"
 #include "store.h"
 #include "customer.h"
 #include "movie.h"
 #include <iostream>
 
+// --------------------------------- Borrow() ----------------------------------
+// Default constructor.
+// preconditions:  none
+// postconditions: action = 'B'; genreCode, mediaType = ' '; keyMovie = nullptr
+// ----------------------------------------------------------------------------
 Borrow::Borrow() : genreCode(' '), mediaType(' '), keyMovie(nullptr) {
     action = 'B';
 }
 
+// --------------------------------- ~Borrow() ---------------------------------
+// Destructor.
+// preconditions:  none
+// postconditions: keyMovie deleted if doTransaction never consumed it
+// ----------------------------------------------------------------------------
 Borrow::~Borrow() {
     delete keyMovie;
 }
 
+// --------------------------------- setData() ---------------------------------
+// Parses the command fields after the action character.
+// preconditions:  in holds "customerID mediaType genreCode <search key fields>"
+// postconditions: customerID, mediaType, genreCode, and keyMovie populated;
+//                 keyMovie is nullptr if genreCode is unrecognized
+// ----------------------------------------------------------------------------
 void Borrow::setData(std::istream& in) {
     in >> customerID >> mediaType >> genreCode;
     keyMovie = Store::makeMovie(genreCode);
@@ -19,6 +45,13 @@ void Borrow::setData(std::istream& in) {
         keyMovie->setSearchKey(in);
 }
 
+// ------------------------------ doTransaction() ------------------------------
+// Validates and executes the borrow: decrements stock and records history.
+// preconditions:  setData() has been called; s is a valid store
+// postconditions: on success, stock decremented by 1, this transaction appended
+//                 to customer history, and returns true; on any failure, an
+//                 error is printed to stderr and returns false
+// ----------------------------------------------------------------------------
 bool Borrow::doTransaction(Store& s) {
     if (!keyMovie) {
         std::cerr << "ERROR: Invalid movie type '" << genreCode
@@ -51,6 +84,11 @@ bool Borrow::doTransaction(Store& s) {
     return true;
 }
 
+// --------------------------------- display() ---------------------------------
+// Outputs the transaction label and brief movie description.
+// preconditions:  none
+// postconditions: writes "Borrow  <brief movie>" to out; out unchanged
+// ----------------------------------------------------------------------------
 void Borrow::display(std::ostream& out) const {
     out << "Borrow  ";
     if (movie)
