@@ -11,15 +11,15 @@
 #include "store.h"
 
 // ---------------------------------- main() -----------------------------------
-// preconditions:  data4movies.txt, data4customers.txt, data4commands.txt exist
-//                 in the working directory
+// preconditions:  data/data4movies.txt, data/data4customers.txt,
+//                 data/data4commands.txt exist relative to the working directory
 // postconditions: all commands processed; output written to stdout; errors to
 //                 stderr; returns 0
 // ----------------------------------------------------------------------------
 int main() {
     Store store;
-    store.buildInventory("data4movies.txt");
-    store.buildCustomers("data4customers.txt");
-    store.processCommands("data4commands.txt");
+    store.buildInventory("data/data4movies.txt");
+    store.buildCustomers("data/data4customers.txt");
+    store.processCommands("data/data4commands.txt");
     return 0;
 }
