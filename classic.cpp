@@ -9,6 +9,7 @@
 // ----------------------------------------------------------------------------
 
 #include "classic.h"
+#include <iomanip>
 
 static std::string trimStr(const std::string& s) {  // strip leading/trailing whitespace
     size_t a = s.find_first_not_of(" \t");
@@ -86,7 +87,7 @@ bool Classic::operator==(const Movie& rhs) const {
 // postconditions: writes "C stock month year majorActor, title, director" to out
 // ----------------------------------------------------------------------------
 void Classic::display(std::ostream& out) const {
-    out << genre << " " << stock << " " << month << " " << year
+    out << genre << " " << std::setw(2) << stock << " " << month << " " << year
         << " " << majorActor << ", " << title << ", " << director;
 }
 

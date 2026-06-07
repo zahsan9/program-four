@@ -8,6 +8,7 @@
 // ----------------------------------------------------------------------------
 
 #include "comedy.h"
+#include <iomanip>
 
 static std::string trimStr(const std::string& s) {  // strip leading/trailing whitespace
     size_t a = s.find_first_not_of(" \t");
@@ -81,7 +82,7 @@ bool Comedy::operator==(const Movie& rhs) const {
 // postconditions: writes "F stock director, title, year" to out; out unchanged
 // ----------------------------------------------------------------------------
 void Comedy::display(std::ostream& out) const {
-    out << genre << " " << stock << " " << director << ", " << title << ", " << year;
+    out << genre << " " << std::setw(2) << stock << " " << director << ", " << title << ", " << year;
 }
 
 // ------------------------------ displayBrief() -------------------------------

@@ -93,7 +93,7 @@ bool ReturnTxn::doTransaction(Store& s) {
 // postconditions: writes "Return   <brief movie>" to out; out unchanged
 // ----------------------------------------------------------------------------
 void ReturnTxn::display(std::ostream& out) const {
-    out << "Return   ";
+    out << "Return  ";
     if (movie)
         movie->displayBrief(out);
 }
