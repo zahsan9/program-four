@@ -75,6 +75,14 @@ bool Borrow::doTransaction(Store& s) {
         std::cerr << "ERROR: Out of stock: ";
         found->displayBrief(std::cerr);
         std::cerr << "\n";
+        if (genreCode == 'C') {
+            Movie* alt = s.findClassicAlternative(found->getTitle());
+            if (alt) {
+                std::cerr << "  Suggestion: ";
+                alt->displayBrief(std::cerr);
+                std::cerr << " (" << alt->getStock() << " available)\n";
+            }
+        }
         return false;
     }
     movie = found;

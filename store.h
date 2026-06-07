@@ -27,6 +27,7 @@ public:
 
     Customer* findCustomer(int id);                  // wrapper around HashTable::find
     Movie* findMovie(char genre, const Movie& key);  // route lookup to the correct BSTree
+    Movie* findClassicAlternative(const std::string& title); // in-stock Classic with same title
 
     BSTree& getComedyTree() { return comedyTree; }   // used by InventoryTxn
     BSTree& getDramaTree() { return dramaTree; }

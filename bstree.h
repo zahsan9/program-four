@@ -20,6 +20,7 @@ public:
 
     bool insert(Movie* m);              // insert m; merge stock if key exists (non-Classic)
     Movie* find(const Movie& key) const; // return movie pointer or nullptr
+    Movie* findAlt(const std::string& title) const; // first in-stock movie with matching title
     void inorderDisplay(std::ostream& out) const; // print all movies in sorted order
     void makeEmpty();                   // delete all nodes and their Movie objects
 
@@ -35,6 +36,7 @@ private:
 
     bool insertHelper(Node*& node, Movie* m);              // recursive insert
     Movie* findHelper(Node* node, const Movie& key) const; // recursive find
+    Movie* findAltHelper(Node* node, const std::string& title) const; // recursive alt search
     void inorderHelper(Node* node, std::ostream& out) const; // recursive traversal
     void destroyTree(Node* node);                          // recursive delete
 };

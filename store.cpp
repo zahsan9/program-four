@@ -130,6 +130,10 @@ Customer* Store::findCustomer(int id) {
 // preconditions:  key fields are set on the key movie object
 // postconditions: returns pointer to the matching Movie, or nullptr if not found
 // ----------------------------------------------------------------------------
+Movie* Store::findClassicAlternative(const std::string& title) {
+    return classicTree.findAlt(title);
+}
+
 Movie* Store::findMovie(char genre, const Movie& key) {
     if (genre == 'F') return comedyTree.find(key);
     if (genre == 'D') return dramaTree.find(key);
